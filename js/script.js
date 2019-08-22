@@ -11,7 +11,8 @@ const submitButton = $(':button')[0];
 //Makes the name field focus state
 $("#name").focus();
 //Set credit card as default payment method
-$('#payment').val("credit card");
+//$('#payment').val("credit card");
+$("#payment option:nth-child(2)").attr('selected','selected');
 
 /** 
  * Targets "other" function, hides it so it displays even if javascript is disabled 
@@ -173,10 +174,26 @@ $('#payment').change(function (){
             $('#credit-card').fadeIn().next().hide().next().hide(); 
           } else if($(this).text() === 'PayPal'){
             $('#credit-card').hide().next().slideDown().next().hide();
-            $('#credit-card input').val('');
+            $('#credit-card input').val(''); // Remove text from Credit Card fields
         } else if($(this).text() === 'Bitcoin'){
             $('#credit-card').hide().next().hide().next().slideDown(); 
             $('#credit-card input').val(''); // Remove text from Credit Card fields
         }
     });
 });
+
+
+console.log('bad test')
+    $('form').prepend('<p id="error-message"></p>');
+    $('#error-message').hide();
+    $('form').submit(function (e){
+    e.preventDefault();
+    })
+
+    let name = $('#name').val();
+
+    function validForm{
+        if ($('#name'.val("")){
+            ($('#name').css-border = 'red';)
+        }
+    }
