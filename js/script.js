@@ -1,10 +1,10 @@
 /**
- * Treehouse Telepath Unit 3 Project Three: Interactive Form 
+ * Treehouse Telepath Unit 3 Project Three: Interactive Form
  * Jane Lewis
  */
- 
-const paragraphs = $("p"); 
-const paypal = $(paragraphs[0]); 
+
+const paragraphs = $("p");
+const paypal = $(paragraphs[0]);
 const bitcoin = $(paragraphs[1]);
 const submitButton = $(':button')[0];
 
@@ -14,10 +14,10 @@ $("#name").focus();
 //$('#payment').val("credit card");
 $("#payment option:nth-child(2)").attr('selected','selected');
 
-/** 
- * Targets "other" function, hides it so it displays even if javascript is disabled 
+/**
+ * Targets "other" function, hides it so it displays even if javascript is disabled
  * but is hidden at first*/
-  $('#other-title-wrapper').hide(); 
+  $('#other-title-wrapper').hide();
 
   $('#title').on('change', function() {
       if ($(this).val() ==="other") {
@@ -31,12 +31,12 @@ $("#payment option:nth-child(2)").attr('selected','selected');
  * In design menu -
  * hide option select theme
  * update color field to read "Please select a T-shirt theme"
- * hide color selection in drop down menu untile design theme is selected in 
- * 
+ * hide color selection in drop down menu untile design theme is selected in
+ *
  */
 
 let chooseYourTheme = $("#color").append(new Option("Please select a t-shirt theme", "select"));  // create a new menu option and set the value equal to the string "select"
-$("#color").val("select"); 
+$("#color").val("select");
 
 $('#design').change(function(){
     if($('#design').val() === 'js puns') {
@@ -46,7 +46,7 @@ $('#design').change(function(){
         $('#color').find('option[value="tomato"]').hide()
         $('#color').find('option[value="steelblue"]').hide()
         $('#color').find('option[value="dimgrey"]').hide()
-        $('#color').val('cornflowerblue')  
+        $('#color').val('cornflowerblue')
     } else if ($('#design').val() === 'heart js') {
         $('#color').find('option[value="cornflowerblue"]').hide()
         $('#color').find('option[value="darkslategrey"]').hide()
@@ -56,7 +56,7 @@ $('#design').change(function(){
         $('#color').find('option[value="dimgrey"]').show()
         $('#color').val('tomato')
     }else {
-      $("#color").val("select"); 
+      $("#color").val("select");
     }
 });
 
@@ -79,7 +79,7 @@ $('.activities').append('<div id="total"></div>');
 var updateCost = function (cost) {
     totalCost += cost;
     document.getElementById("total").innerHTML = "Total: $" + totalCost;
-};  
+};
 
 $("input[name='all']").change(function () {
     if ($(this).prop("checked")) {
@@ -162,7 +162,7 @@ $("input[name='npm']").change(function () {
 });
 
 
- 
+
 //Initially hides paypal and bitcoin, shows clicked payment and hides other two options
 //$('#paypal, #bitcoin').hide();
 
@@ -171,29 +171,97 @@ $('#payment option[value="select_method"]').wrap('<span>').hide() // Hide the â€
 $('#payment').change(function (){
     $('#payment option:selected').each(function() {
         if($(this).text() === 'Credit Card') {
-            $('#credit-card').fadeIn().next().hide().next().hide(); 
+            $('#credit-card').fadeIn().next().hide().next().hide();
           } else if($(this).text() === 'PayPal'){
             $('#credit-card').hide().next().slideDown().next().hide();
             $('#credit-card input').val(''); // Remove text from Credit Card fields
         } else if($(this).text() === 'Bitcoin'){
-            $('#credit-card').hide().next().hide().next().slideDown(); 
+            $('#credit-card').hide().next().hide().next().slideDown();
             $('#credit-card input').val(''); // Remove text from Credit Card fields
         }
     });
 });
 
 
-console.log('bad test')
+////////////////////////////////////////////Validation////////////////////////////////////////////////////////////////////////
+
+let formGood = true;
+ let name = $('#name');
+ let mail = $('#mail')
+let activities = $('.activities');
+let emailInput = emailAddress;
+let zip = $('#zip');
+let cvv = $('#cvv');
+var emailAddress = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+var creditCard = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g;
+var zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
+var errorMessage ="";
+
+
+$('#name, #mail, #cc-num, #zip, #cvv, #other-field').val();
+console.log(this)
+function validBasicInfo() {
+  if ( $('#name').val() === "" ) {
+  console.log("Error!");
+  $('#name').addClass('error');
+  $('#name').css('border-color','red');
+  $('#name').after('Input name');
+  } if ( !emailAddress.test($('#mail').val()) ) {
+  $('#mail').addClass('error');
+  $('#mail').css('border-color','red');
+  $('#mail').after('Input email');
+}
+}
+
+function validActivity(){
+  console.log('yay')
+  if ($('.activities').label > ('input:checked').length === 0)  {
+ $('.activities').addClass('error');
+ //$('.activities').css('unCheckedBox','red');
+ $('.activities').after('Must choose 1 activity');
+}
+}
+
+function validaPaymentMethod(){
+  //console.log('shout')
+   //if ( $("#payment").val() === "select_method" )  {
+    console.log('shout')
+   if ($("#payment").val() === "credit card" || !creditCard.test($("#cc-num").val() || !zipCode.test($("#zip").val() || ($("#cvv").val().length < 3))))  {
+  $('#cc-num').css('border-color','red');
+  $('#cc-num').after('Input credit card number');
+  $('#zip').css('border-color','red');
+  $('#zip').after('Input zipcode');
+  $('#cvv').css('border-color','red');
+  $('#cvv').after('Input cvv number');
+}
+}
+    // if ( $(document).val() === "")  {
+    // $(this).removeClass('success');
+    // $(this).addClass('error');
+    // } else {
+    // $(this).removeClass('error');
+    // $(this).addClass('success');
+    // };
+
     $('form').prepend('<p id="error-message"></p>');
     $('#error-message').hide();
     $('form').submit(function (e){
     e.preventDefault();
     })
 
-    let name = $('#name').val();
+    validBasicInfo();
+    validActivity();
+    validaPaymentMethod();
 
-    function validForm{
-        if ($('#name'.val("")){
-            ($('#name').css-border = 'red';)
-        }
-    }
+  //}
+  
+
+document.querySelectorAll('.error').length === 0;
+  if (formGood) {
+    $("html, body").animate({scrollTop: 0}, "slow");
+alert('Form Complete').show();
+  } else {
+    document.getElementById('error-message').innerHTML = errorMessage;
+    $("html, body").animate({scrollTop: 0}, "slow");
+    $('#eror-message').show();
+};
