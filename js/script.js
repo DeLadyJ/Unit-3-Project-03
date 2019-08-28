@@ -210,7 +210,7 @@ $('#payment').change(function (){
 //let emailInput = emailAddress;
 // let zip = $('#zip');
 // let cvv = $('#cvv');
-//var emailAddress = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+let mail = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 // var creditCard = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g;
 // var zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
 //var errorMessage = "";
@@ -295,11 +295,17 @@ $('form').submit(function (e)
 
   if ($('#name').val() ==="")
   {
-    console.log('yay');
-    $("html, body").animate({scrollTop: 0}, "slow")
+    //console.log('yay');
+    $("html, body").animate({scrollTop: 0}, "slow");
     errorMessage = "Error! Input name";
     $('#name').addClass('error');
     //$('#name').css.before('errorMessage')
+  }
+  else if ($('#mail').test(mail) === "")
+  {
+    console.log('yay');
+      $("html, body").animate({scrollTop: 0}, "slow");
+      errorMessage = "Error! Input valid mail";
   }
   else
   {
