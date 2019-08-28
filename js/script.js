@@ -185,83 +185,128 @@ $('#payment').change(function (){
 
 ////////////////////////////////////////////Validation////////////////////////////////////////////////////////////////////////
 
-let formGood = true;
- let name = $('#name');
- let mail = $('#mail')
-let activities = $('.activities');
-let emailInput = emailAddress;
-let zip = $('#zip');
-let cvv = $('#cvv');
-var emailAddress = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-var creditCard = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g;
-var zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
-var errorMessage ="";
+//let name = $('#name');
+// const formSubmitButton = document.querySelector('button[type="submit"]');
+// const nameInput = document.getElementById('name');
+//
+// formSubmitButton.addEventListener('click', e =>
+// {
+// if (nameInput.value === "")
+// {
+//   name.css('border-color', 'red');
+//   nameInputTitle.innerHTML = "Name:('Input name')";
+//   e.preventDefault();
+//   formGood = false
+// }
+// else /*if ($('#name') !== "")*/{
+//      formGood
+// }
+// })
+
+ // let formGood = true;
+//let name = nameInput;
+//let mail = $('#mail')
+//let activities = $('.activities');
+//let emailInput = emailAddress;
+// let zip = $('#zip');
+// let cvv = $('#cvv');
+//var emailAddress = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+// var creditCard = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g;
+// var zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
+//var errorMessage = "";
+//$('#name, #mail, #cc-num, #zip, #cvv, #other-field').val();
+//console.log(this)
+// function validBasicInfo()
+
+//     formGood = false
+// 	}
+	// if (!emailAddress.test($('#mail').val())) {
+	// 	$('#mail').addClass('error');
+	// 	$('#mail').css('border-color', 'red');
+	// 	$('#mail').after('Input email');
+	// 	formGood = false
+// 	 }
+//    else
+//    {
+//      nameInput
+//    }
+// }
+
+// function validActivity() {
+// 	console.log('yay')
+// 	if ($('.activities').label > ('input:checked').length === 0) {
+// 		$('.activities').addClass('error');
+// 		//$('.activities').css('unCheckedBox','red');
+// 		$('.activities').after('Must choose 1 activity');
+// 		formGood = false
+// 	}
+// }
+//
+// function validaPaymentMethod() {
+// 	//if ( $("#payment").val() === "select_method" )  {
+// 	console.log('shout')
+// 	if ($("#payment").val() === "credit card" || !creditCard.test($("#cc-num").val() || !zipCode.test($("#zip").val() || ($("#cvv").val().length < 3)))) {
+// 		$('#cc-num').css('border-color', 'red');
+// 		$('#cc-num').after('Input credit card number');
+// 		$('#zip').css('border-color', 'red');
+// 		$('#zip').after('Input zipcode');
+// 		$('#cvv').css('border-color', 'red');
+// 		$('#cvv').after('Input cvv number');
+// 		formGood = false
+// 	}
+// }
+// if ( $(document).val() === "")  {
+// $(this).removeClass('success');
+// $(this).addClass('error');
+// } else {
+// $(this).removeClass('error');
+// $(this).addClass('success');
+// };
+// $('form').prepend('<p id="error-message"></p>');
+// $('#error-message').hide();
+// $('form').submit(function(e) {
+// 	e.preventDefault();
+// })
+// validBasicInfo();
+// validActivity();
+// validaPaymentMethod();
+//}
+// if (formGood); {
+// 	document.querySelectorAll('.error').length === 0;
+// 	$("html, body").animate({
+// 		scrollTop: 0
+// 	}, "slow");
+// 	alert('Form Complete').show();
+// } else {
+// 	(formGood) = false
+// 	document.getElementById('error-message').innerHTML = errorMessage;
+// 	$("html, body").animate({
+// 		scrollTop: 0
+// 	}, "slow");
+// 	$('#eror-message').show();
+// };
 
 
-$('#name, #mail, #cc-num, #zip, #cvv, #other-field').val();
-console.log(this)
-function validBasicInfo() {
-  if ( $('#name').val() === "" ) {
-  console.log("Error!");
-  $('#name').addClass('error');
-  $('#name').css('border-color','red');
-  $('#name').after('Input name');
-  } if ( !emailAddress.test($('#mail').val()) ) {
-  $('#mail').addClass('error');
-  $('#mail').css('border-color','red');
-  $('#mail').after('Input email');
-}
-}
+$('form').prepend('<p id="error-message"></p>');
+$('#error-message').hide();
+$('form').submit(function (e)
+{
+  e.preventDefault();
 
-function validActivity(){
-  console.log('yay')
-  if ($('.activities').label > ('input:checked').length === 0)  {
- $('.activities').addClass('error');
- //$('.activities').css('unCheckedBox','red');
- $('.activities').after('Must choose 1 activity');
-}
-}
-
-function validaPaymentMethod(){
-  //console.log('shout')
-   //if ( $("#payment").val() === "select_method" )  {
-    console.log('shout')
-   if ($("#payment").val() === "credit card" || !creditCard.test($("#cc-num").val() || !zipCode.test($("#zip").val() || ($("#cvv").val().length < 3))))  {
-  $('#cc-num').css('border-color','red');
-  $('#cc-num').after('Input credit card number');
-  $('#zip').css('border-color','red');
-  $('#zip').after('Input zipcode');
-  $('#cvv').css('border-color','red');
-  $('#cvv').after('Input cvv number');
-}
-}
-    // if ( $(document).val() === "")  {
-    // $(this).removeClass('success');
-    // $(this).addClass('error');
-    // } else {
-    // $(this).removeClass('error');
-    // $(this).addClass('success');
-    // };
-
-    $('form').prepend('<p id="error-message"></p>');
-    $('#error-message').hide();
-    $('form').submit(function (e){
-    e.preventDefault();
-    })
-
-    validBasicInfo();
-    validActivity();
-    validaPaymentMethod();
-
-  //}
-  
-
-document.querySelectorAll('.error').length === 0;
-  if (formGood) {
+  if ($('#name').val() ==="")
+  {
+    console.log('yay');
+    $("html, body").animate({scrollTop: 0}, "slow")
+    errorMessage = "Error! Input name";
+    $('#name').addClass('error');
+    //$('#name').css.before('errorMessage')
+  }
+  else
+  {
     $("html, body").animate({scrollTop: 0}, "slow");
-alert('Form Complete').show();
-  } else {
-    document.getElementById('error-message').innerHTML = errorMessage;
-    $("html, body").animate({scrollTop: 0}, "slow");
-    $('#eror-message').show();
-};
+    errorMessage = "";
+    alert('Form complete');
+  }
+  document.getElementById('error-message').innerHTML = errorMessage;
+  $('#error-message').show();
+})
