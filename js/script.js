@@ -101,6 +101,7 @@ jsFrameworks.change(function () {
         express.parent().find('.unavailable').remove();
         updateCost(-100);
     }
+
 });
 
 jsLibraries.change(function () {
@@ -185,52 +186,118 @@ $('#payment').change(function (){
 
 ////////////////////////////////////////////Validation////////////////////////////////////////////////////////////////////////
 
-//let name = $('#name');
 // const formSubmitButton = document.querySelector('button[type="submit"]');
 // const nameInput = document.getElementById('name');
 //
-// formSubmitButton.addEventListener('click', e =>
-// {
-// if (nameInput.value === "")
-// {
-//   name.css('border-color', 'red');
-//   nameInputTitle.innerHTML = "Name:('Input name')";
-//   e.preventDefault();
+//
 //   formGood = false
 // }
-// else /*if ($('#name') !== "")*/{
+// else {
 //      formGood
-// }
-// })
+// };
 
- // let formGood = true;
-//let name = nameInput;
-//let mail = $('#mail')
-//let activities = $('.activities');
-//let emailInput = emailAddress;
+
+let formGood = true;
+ let name = $('#name');
+//  let mail = $('#mail')
+// let activities = $('.activities');
+// let emailInput = emailAddress;
 // let zip = $('#zip');
 // let cvv = $('#cvv');
-let mail = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-// var creditCard = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g;
-// var zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
-//var errorMessage = "";
-//$('#name, #mail, #cc-num, #zip, #cvv, #other-field').val();
-//console.log(this)
-// function validBasicInfo()
+// let mailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i
+// let mail = $('#mail').val()
+//let mail = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+// let creditCard = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g;
+// let zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
+let errorMessage ="";
 
-//     formGood = false
-// 	}
-	// if (!emailAddress.test($('#mail').val())) {
-	// 	$('#mail').addClass('error');
-	// 	$('#mail').css('border-color', 'red');
-	// 	$('#mail').after('Input email');
-	// 	formGood = false
-// 	 }
-//    else
-//    {
-//      nameInput
-//    }
+
+// $('#name, #mail, #cc-num, #zip, #cvv, #other-field').val();
+// console.log(this)
+$('form').prepend('<p id="error-message"></p>');
+$('#error-message').hide();
+$('form').submit(function (e){
+    //validName();
+    validEmail();
+   //validActivity();
+e.preventDefault();
+});
+
+// function validName() {
+//   if ($('#name').val() === "" ) {
+//   //console.log("Error!");
+//$("html, body").animate({scrollTop: 0}, "slow");
+//   //$('#name').addClass("error")
+//   $('#name').append('<p class="error">')
+//   $('#name').css('border-color','red');
+//   $('#name').after('Input name');
 // }
+// else if ($('#name').val() !=="")
+//   {
+//   $('#name').removeClass('error')
+//   return true
+// }
+// }
+
+function validEmail() {
+  let mailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i
+  let mail = $('#mail').val()
+  console.log('code good')
+  if (mail ==="" || mailRegex.test(mail) === false)
+  {
+    $("html, body").animate({scrollTop: 0}, "slow");
+$('#mail').append('<p class="error">')
+
+    $('#mail').css('border-color','red');
+    $('#mail').after('Input valid email');
+  }
+    else //if (mail !=="" || mailRegex.test(mail) !== false)
+    {
+      //
+$('#mail').removeClass('error')
+    return true
+}
+}
+// }
+
+// function validActivity(){
+//   console.log('good code')
+//   if ($('.activities input[type=checkbox]:checked').length === 0)  {
+//    $('#total').html("Must choose 1 activity");
+//  $('.activities').addClass('error');
+// $("html, body").animate({scrollTop: 0}, "slow");
+// }
+// else
+// {
+//   ($('.activities').removeClass('error'))
+//   console.log('good code')
+//       return true
+// }
+// }
+
+// function validaPaymentMethod(){
+//   //console.log('shout')
+//    //if ( $("#payment").val() === "select_method" )  {
+//     console.log('shout')
+//    if ($("#payment").val() === "credit card" || !creditCard.test($("#cc-num").val() || !zipCode.test($("#zip").val() || ($("#cvv").val().length < 3))))  {
+//   $('#cc-num').css('border-color','red');
+//   $('#cc-num').after('Input credit card number');
+//   $('#zip').css('border-color','red');
+//   $('#zip').after('Input zipcode');
+//   $('#cvv').css('border-color','red');
+//   $('#cvv').after('Input cvv number');
+// }
+// }
+    // if ( $(document).val() === "")  {
+    // $(this).removeClass('success');
+    // $(this).addClass('error');
+    // } else {
+    // $(this).removeClass('error');
+    // $(this).addClass('success');
+    // };
+
+
+
 
 // function validActivity() {
 // 	console.log('yay')
@@ -255,22 +322,12 @@ let mail = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][
 // 		formGood = false
 // 	}
 // }
-// if ( $(document).val() === "")  {
-// $(this).removeClass('success');
-// $(this).addClass('error');
-// } else {
-// $(this).removeClass('error');
-// $(this).addClass('success');
-// };
-// $('form').prepend('<p id="error-message"></p>');
-// $('#error-message').hide();
-// $('form').submit(function(e) {
-// 	e.preventDefault();
-// })
-// validBasicInfo();
+
+
+
 // validActivity();
 // validaPaymentMethod();
-//}
+// }
 // if (formGood); {
 // 	document.querySelectorAll('.error').length === 0;
 // 	$("html, body").animate({
@@ -285,34 +342,3 @@ let mail = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][
 // 	}, "slow");
 // 	$('#eror-message').show();
 // };
-
-
-$('form').prepend('<p id="error-message"></p>');
-$('#error-message').hide();
-$('form').submit(function (e)
-{
-  e.preventDefault();
-
-  if ($('#name').val() ==="")
-  {
-    //console.log('yay');
-    $("html, body").animate({scrollTop: 0}, "slow");
-    errorMessage = "Error! Input name";
-    $('#name').addClass('error');
-    //$('#name').css.before('errorMessage')
-  }
-  else if ($('#mail').test(mail) === "")
-  {
-    console.log('yay');
-      $("html, body").animate({scrollTop: 0}, "slow");
-      errorMessage = "Error! Input valid mail";
-  }
-  else
-  {
-    $("html, body").animate({scrollTop: 0}, "slow");
-    errorMessage = "";
-    alert('Form complete');
-  }
-  document.getElementById('error-message').innerHTML = errorMessage;
-  $('#error-message').show();
-})
