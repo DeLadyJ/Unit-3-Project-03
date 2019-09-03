@@ -220,8 +220,9 @@ $('form').submit(function (e){
     e.preventDefault();
 
   }
-//e.preventDefault();
+
 });
+
 const nameError = $('<span id="nameError">Input name</span>');
 $('#name').after(nameError);
 nameError.hide();
