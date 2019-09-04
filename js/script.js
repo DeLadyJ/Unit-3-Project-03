@@ -215,8 +215,8 @@ $('form').submit(function (e){
     validName();
     validEmail();
    validActivity();
-  // validPayment();
-  if (!validName() || !validEmail() || !validActivity()){
+   validPayment();
+  if (!validName() || !validEmail() || !validActivity() || !validPayment()){
     e.preventDefault();
 alert('Form not complete')
   }
@@ -264,6 +264,8 @@ mailError.show();
 }
 }
 
+
+
 function validActivity(){
   console.log('good code')
   if ($('.activities input[type=checkbox]:checked').length === 0)  {
@@ -279,44 +281,109 @@ return Tree
 }
 }
 
+const paymentError = $('<span id="paymentError">Input valid email</span>');
+$('#payment').after(paymentError);
+paymentError.hide();
 
+const ccNumError = $('<span id="ccNumError">Input valid credit card information</span>');
+$('#ccNum').after(ccNumError);
+(ccNumError).hide();
 
-function validPayment() {
-    console.log('payment good')
-    let payment = $('.payment').val();
-        let cc = $('#cc').val();
-      let creditCardRegex = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g
-      let zip = $('#zip').val;
-      let zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
-      //let cvv = $('#cvv').val;
-      let cvvRegex =  /^[0-9]{3,4}$/;
-    if ($('.payment').val() === "" ) {
-      $('.payment').append('<p class="error">')
-    $('.payment').after('Input valid information');
-    }
-    if ($('.payment').val() === "credit card" ||  $('#cc').val()   ==="" || creditCardRegex.test(mail) === false || zipRegex.test(zip) === false || $('#zip').val ==="" || cvvRegex.test === false || $('#cvv').val ==="") {
-  //     {
-      $('#cc').append('<p class="error">');
-      $('#cc').css('border-color','red');
-      $('#cc').after('Input valid card number')
-      $('#zip').append('<p class="error">');
-      $('#zip').css('border-color','red');
-      $('#zip').after('Input valid zip ode')
-      $('#cvv').append('<p class="error">');
-      $('#cvv').css('border-color','red');
-      $('#cvv').after('Input valid cvv number')
-      return false
+const zipError = $('<span id="zipError">Input valid zip code information</span>');
+$('#zip').after(zipError);
+(zipError).hide();
+
+const cvvError = $('<span id="cvvError">Input valid cvv code information</span>');
+$('#cvv').after(cvvError);
+(cvvError).hide();
+
+// const paymentError = $('<span id="paymentError">Input payment information</span>');
+// $('#payment').after(paymentError);
+// (paymentError).hide();
+
+ function validPayment() {
+    let ccNum = $('#ccNum').val();
+    let ccNumRegex = /^[0-9]{3,4}$/
+    let value = $('#payment').val();
+    let zip = $('#zip').val();
+    let zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
+    let cvv = $('#cvv').val;
+    let cvvRegex =  /^[0-9]{3,4}$/;
+if (value === "credit card")
+{
+  paymentError.show;
+  return false
+}
+//    else
+//      {
+//        return true
+//      }
+ if (ccNumRegex.test(ccNum) === false || ccNum ==="")
+{
+  ccNumError.show();
+  return false
+}
+// else
+//   {
+//     return true
+//   }
+    
+if (zipRegex.test(zip) === false|| zip ==="") {
+  zipError.show();
+  return false
+}
+// else
+//   {
+//     return true
+//   }
+if (cvvRegex.test(cvv) === false || cvv ==="")
+  {
+    cvvError.show;
+    return false
   }
-    else {
-  // else if  ($('#payment').val ==="paypal" || $('#payment').val ==="bitcoin" ){
-      $("html, body").animate({scrollTop: 0}, "slow");
-    $('#payment').removeClass("error")
-    $('#cc').removeClass("error")
-    $('#zip').removeClass("error")
-    $('#cvv').removeClass("error")
+else
+  {
     return true
-    }
   }
+}
+
+
+// function validPayment() {
+//     console.log('payment good')
+//     let payment = $('#payment').val();
+//         let cc = $('#cc').val();
+//       let creditCardRegex = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g
+//       
+
+//     if ($('#payment').val() === "" ) {
+//         paymentError.show();
+//         return false   
+    //   $('.payment').append('<p class="error">')
+    // $('.payment').after('Input valid information');
+    //}
+    //if ($('.payment').val() === "credit card" ||  $('#cc').val()   ==="" || creditCardRegex.test(mail) === false || zipRegex.test(zip) === false || $('#zip').val ==="" || cvvRegex.test === false || $('#cvv').val ==="")
+//     {
+//       $('#cc').append('<p class="error">');
+//       $('#cc').css('border-color','red');
+//       $('#cc').after('Input valid card number')
+//       $('#zip').append('<p class="error">');
+//       $('#zip').css('border-color','red');
+//       $('#zip').after('Input valid zip ode')
+//       $('#cvv').append('<p class="error">');
+//       $('#cvv').css('border-color','red');
+//       $('#cvv').after('Input valid cvv number')
+//       return false
+//   }
+    //else {
+  // else if  ($('#payment').val ==="paypal" || $('#payment').val ==="bitcoin" ){
+    //   $("html, body").animate({scrollTop: 0}, "slow");
+    // $('#payment').removeClass("error")
+    // $('#cc').removeClass("error")
+    // $('#zip').removeClass("error")
+    // $('#cvv').removeClass("error")
+//     return true
+//     }
+//   }
 
 // function validPayment(){
 //   let payment = $('#payment').val()
