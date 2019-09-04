@@ -186,29 +186,6 @@ $('#payment').change(function (){
 
 ////////////////////////////////////////////Validation////////////////////////////////////////////////////////////////////////
 
-// const formSubmitButton = document.querySelector('button[type="submit"]');
-// const nameInput = document.getElementById('name');
-//
-//
-//   formGood = false
-// }
-// else {
-//      formGood
-// };
-
-
-let formGood = true;
- let name = $('#name');
-//  let mail = $('#mail')
-// let activities = $('.activities');
-// let emailInput = emailAddress;
-
-// let zip = $('#zip')
-let errorMessage ="";
-
-
-// $('#name, #mail, #cc-num, #zip, #cvv, #other-field').val();
-// console.log(this)
 $('form').prepend('<p id="error-message"></p>');
 $('#error-message').hide();
 $('form').submit(function (e){
@@ -226,13 +203,13 @@ alert('Form not complete')
     }
 });
 
-
 const nameError = $('<span id="nameError">Input name</span>');
 $('#name').after(nameError);
 nameError.hide();
+
 function validName() {
   if ($('#name').val() === "" ) {
-  console.log("Error!");
+  //console.log("Error!");
 $("html, body").animate({scrollTop: 0}, "slow");
     nameError.show();
   $('#name').css('border-color','red');
@@ -250,7 +227,7 @@ mailError.hide();
 function validEmail() {
   let mailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i
   let mail = $('#mail').val()
-  console.log('code good')
+ // console.log('code good')
   if (mail ==="" || mailRegex.test(mail) === false)
   {
     $("html, body").animate({scrollTop: 0}, "slow");
@@ -264,10 +241,8 @@ mailError.show();
 }
 }
 
-
-
 function validActivity(){
-  console.log('good code')
+  //console.log('good code')
   if ($('.activities input[type=checkbox]:checked').length === 0)  {
    $('#total').html("Must choose 1 activity");
  $('.activities').addClass('error');
@@ -277,7 +252,7 @@ $('.activities').focus
 else
 {
 $('.activities').removeClass('error');
-return Tree
+return true
 }
 }
 
@@ -286,7 +261,7 @@ $('#payment').after(paymentError);
 paymentError.hide();
 
 const ccNumError = $('<span id="ccNumError">Input valid credit card information</span>');
-$('#ccNum').after(ccNumError);
+//$('#ccNum').after(ccNumError);
 (ccNumError).hide();
 
 const zipError = $('<span id="zipError">Input valid zip code information</span>');
@@ -302,6 +277,7 @@ $('#cvv').after(cvvError);
 // (paymentError).hide();
 
  function validPayment() {
+     console.log('good code')
     let ccNum = $('#ccNum').val();
     let ccNumRegex = /^[0-9]{3,4}$/
     let value = $('#payment').val();
@@ -320,6 +296,8 @@ if (value === "credit card")
 //      }
  if (ccNumRegex.test(ccNum) === false || ccNum ==="")
 {
+    $('#ccNum').after(ccNumError);
+    $('#ccnum').css('border-color','red');
   ccNumError.show();
   return false
 }
@@ -330,6 +308,7 @@ if (value === "credit card")
     
 if (zipRegex.test(zip) === false|| zip ==="") {
   zipError.show();
+  $('#zip').css('border-color','red');
   return false
 }
 // else
@@ -339,6 +318,8 @@ if (zipRegex.test(zip) === false|| zip ==="") {
 if (cvvRegex.test(cvv) === false || cvv ==="")
   {
     cvvError.show;
+    $('#cvv').after(cvvError);
+    $('#cvv').css('border-color','red');
     return false
   }
 else
