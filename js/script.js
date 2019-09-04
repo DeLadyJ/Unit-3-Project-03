@@ -213,10 +213,10 @@ $('form').prepend('<p id="error-message"></p>');
 $('#error-message').hide();
 $('form').submit(function (e){
     validName();
-    //validEmail();
-   //validActivity();
+    validEmail();
+   validActivity();
   // validPayment();
-  if(!(validName())) {
+  if (!validName() || !validEmail() || !validActivity()){
     e.preventDefault();
 alert('Form not complete')
   }
@@ -247,7 +247,6 @@ else
 const mailError = $('<span id="mailError">Input valid email</span>');
 $('#mail').after(mailError);
 mailError.hide();
-
 function validEmail() {
   let mailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i
   let mail = $('#mail').val()
@@ -255,9 +254,9 @@ function validEmail() {
   if (mail ==="" || mailRegex.test(mail) === false)
   {
     $("html, body").animate({scrollTop: 0}, "slow");
-nameError.show();
+mailError.show();
     $('#mail').css('border-color','red');
-return false
+    return false
   }
     else 
     {
@@ -265,20 +264,20 @@ return false
 }
 }
 
-// function validActivity(){
-//   console.log('good code')
-//   if ($('.activities input[type=checkbox]:checked').length === 0)  {
-//    $('#total').html("Must choose 1 activity");
-//  $('.activities').addClass('error');
-// $("html, body").animate({scrollMiddle: 0}, "slow");
-// $('.activities').focus
-// }
-// else
-// {
-// $('.activities').removeClass('error');
-// return Tree
-// }
-// }
+function validActivity(){
+  console.log('good code')
+  if ($('.activities input[type=checkbox]:checked').length === 0)  {
+   $('#total').html("Must choose 1 activity");
+ $('.activities').addClass('error');
+$("html, body").animate({scrollMiddle: 0}, "slow");
+$('.activities').focus
+}
+else
+{
+$('.activities').removeClass('error');
+return Tree
+}
+}
 
 
 
