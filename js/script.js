@@ -185,6 +185,8 @@ $('#payment').change(function (){
 
 
 ////////////////////////////////////////////Validation////////////////////////////////////////////////////////////////////////
+/*Checks that each field has the correct information
+Prevents the form from submitting if information is missing*/
 
 $('form').prepend('<p id="error-message"></p>');
 $('#error-message').hide();
@@ -203,6 +205,7 @@ alert('Form not complete')
     }
 });
 
+/*Added the error message in a span tag, checks for name validation, scrolls to top if error message is present*/
 const nameError = $('<span id="nameError">Input name</span>');
 $('#name').after(nameError);
 nameError.hide();
@@ -221,6 +224,7 @@ else
 }
 }
 
+/*Added the error message in a span tag, checks for email validation, scrolls to top if error message is present*/
 const mailError = $('<span id="mailError">Input valid email</span>');
 $('#mail').after(mailError);
 mailError.hide();
@@ -241,6 +245,7 @@ mailError.show();
 }
 }
 
+/* Checks that i activity is checked, scrolls to top if 1 activity is not checked */
 function validActivity(){
   //console.log('good code')
   if ($('.activities input[type=checkbox]:checked').length === 0)  {
@@ -256,6 +261,7 @@ return true
 }
 }
 
+/*Added payment error messages in span tags*/
 const paymentError = $('<span id="paymentError">Input valid email</span>');
 $('#payment').after(paymentError);
 paymentError.hide();
@@ -276,6 +282,7 @@ $('#cvv').after(cvvError);
 // $('#payment').after(paymentError);
 // (paymentError).hide();
 
+/*Checks payment is selected and valid, checks the zipcode and cvv number are entered and valid */
  function validPayment() {
      console.log('good code')
     let ccNum = $('#ccNum').val();
@@ -297,7 +304,7 @@ if (value === "credit card")
  if (ccNumRegex.test(ccNum) === false || ccNum ==="")
 {
     $('#ccNum').after(ccNumError);
-    $('#ccnum').css('border-color','red');
+    $('#ccNum').css('border-color','red');
   ccNumError.show();
   return false
 }
