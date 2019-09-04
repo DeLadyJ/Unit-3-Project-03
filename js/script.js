@@ -218,10 +218,15 @@ $('form').submit(function (e){
   // validPayment();
   if(!(validName())) {
     e.preventDefault();
-
+alert('Form not complete')
   }
+  else
+    {
+      alert('Form complete')
+    }
 
 });
+
 
 const nameError = $('<span id="nameError">Input name</span>');
 $('#name').after(nameError);
