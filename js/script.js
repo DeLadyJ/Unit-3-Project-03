@@ -224,7 +224,6 @@ alert('Form not complete')
     {
       alert('Form complete')
     }
-
 });
 
 
@@ -233,41 +232,38 @@ $('#name').after(nameError);
 nameError.hide();
 function validName() {
   if ($('#name').val() === "" ) {
-  //console.log("Error!");
+  console.log("Error!");
 $("html, body").animate({scrollTop: 0}, "slow");
     nameError.show();
-  //$('#name').addClass("error")
-  //$('#name').append('<p class="error">')
   $('#name').css('border-color','red');
-  //$('#name').after('Input name');
   return false
 }
-else //if ($('#name').val() !=="")
+else 
   {
-  //$('#name').removeClass('error')
   return true
 }
 }
 
-// function validEmail() {
-//   let mailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i
-//   let mail = $('#mail').val()
-//   console.log('code good')
-//   if (mail ==="" || mailRegex.test(mail) === false)
-//   {
-//     $("html, body").animate({scrollTop: 0}, "slow");
-// $('#mail').append('<p class="error">')
-//
-//     $('#mail').css('border-color','red');
-//     $('#mail').after('Input valid email');
-//   }
-//     else //if (mail !=="" || mailRegex.test(mail) !== false)
-//     {
-//       //
-// $('#mail').removeClass('error')
-//     return true
-// }
-// }
+const mailError = $('<span id="mailError">Input valid email</span>');
+$('#mail').after(mailError);
+mailError.hide();
+
+function validEmail() {
+  let mailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i
+  let mail = $('#mail').val()
+  console.log('code good')
+  if (mail ==="" || mailRegex.test(mail) === false)
+  {
+    $("html, body").animate({scrollTop: 0}, "slow");
+nameError.show();
+    $('#mail').css('border-color','red');
+return false
+  }
+    else 
+    {
+    return true
+}
+}
 
 // function validActivity(){
 //   console.log('good code')
