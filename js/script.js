@@ -277,6 +277,33 @@ else
    }
 }
 
+const zipError = $('<span id="zipError">Input valid zip code information</span>');
+$('#zip').after(zipError);
+(zipError).hide();
+
+function validZip (){
+  let zip = $('#zip').val();
+     let zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
+  if (zipRegex.test(zip) === false) {
+    zipError.show();
+    $('#zip').css('border-color','red');
+    return false
+  }
+  if (zip ==="")
+  {
+    zipError.show();
+    $('#zip').css('border-color','red');
+    return false
+  }
+  else
+    {
+      zipError.hide();
+    $('#zip').css('border-color','none');
+      return true
+    }
+}
+
+
 $('form').prepend('<p id="error-message"></p>');
 $('#error-message').hide();
 $('form').submit(function (e){
@@ -284,8 +311,9 @@ $('form').submit(function (e){
    validEmail();
    validActivity();
    validNumber ();
+   validZip ();
    //validPayment();
-  if (!validName() || !validEmail() || !validActivity() || !validNumber ()) //!validPayment()){
+  if (!validName() || !validEmail() || !validActivity() || !validNumber () || !validZip ()) //!validPayment()){
   {
   e.preventDefault();
 //alert('Form not complete')
@@ -317,9 +345,7 @@ $('form').submit(function (e){
 
 
 
-// const zipError = $('<span id="zipError">Input valid zip code information</span>');
-// $('#zip').after(zipError);
-// (zipError).hide();
+
 
 // const cvvError = $('<span id="cvvError">Input valid cvv code information</span>');
 // $('#cvv').after(cvvError);
@@ -330,8 +356,7 @@ $('form').submit(function (e){
 //      //console.log(value.toLowerCase === "credit card")
 
 //     let value = $('#payment').val();
-//     let zip = $('#zip').val();
-//     let zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
+//     
 //     let cvv = $('#cvv').val();
 //     let cvvRegex =  /^[0-9]{3}$/;
 // if (value.toLowerCase === "credit card")
@@ -358,15 +383,7 @@ $('form').submit(function (e){
 // //     $('#ccNum').removeClass(ccNumError)
 // //   }
     
-// if (zipRegex.test(zip) === false && zip ==="") {
-//   zipError.show();
-//   $('#zip').css('border-color','red');
-//   return false
-// }
-// // else
-// //   {
-// //     return true
-// //   }
+
 // if (cvvRegex.test(cvv) === false && cvv === "")
 //   {
 //     cvvError.show();
