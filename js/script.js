@@ -188,22 +188,7 @@ $('#payment').change(function (){
 /*Checks that each field has the correct information
 Prevents the form from submitting if information is missing*/
 
-$('form').prepend('<p id="error-message"></p>');
-$('#error-message').hide();
-$('form').submit(function (e){
-    validName();
-    validEmail();
-   validActivity();
-   validPayment();
-  if (!validName() || !validEmail() || !validActivity() || !validPayment()){
-    e.preventDefault();
-alert('Form not complete')
-  }
-  else
-    {
-      alert('Form complete')
-    }
-});
+
 
 /*Added the error message in a span tag, checks for name validation, scrolls to top if error message is present*/
 const nameError = $('<span id="nameError">Input name</span>');
@@ -220,6 +205,8 @@ $("html, body").animate({scrollTop: 0}, "slow");
 }
 else 
   {
+    $('#name').css('border','none');
+    nameError.hide();
   return true
 }
 }
@@ -229,18 +216,20 @@ const mailError = $('<span id="mailError">Input valid email</span>');
 $('#mail').after(mailError);
 mailError.hide();
 function validEmail() {
-  let mailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i
-  let mail = $('#mail').val()
+  let mailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(\.[a-zA-Z]+)+$/;
+  let mail = $('#mail').val();
  // console.log('code good')
-  if (mail ==="" || mailRegex.test(mail) === false)
+  if (mailRegex.test(mail) === false)
   {
     $("html, body").animate({scrollTop: 0}, "slow");
 mailError.show();
-    $('#mail').css('border-color','red');
+$('#mail').css('border-color','red');
     return false
   }
     else 
     {
+      $('#mail').css('border','none')
+      mailError.hide();
     return true
 }
 }
@@ -261,76 +250,138 @@ return true
 }
 }
 
-/*Added payment error messages in span tags*/
-const paymentError = $('<span id="paymentError">Input valid email</span>');
-$('#payment').after(paymentError);
-paymentError.hide();
-
-const ccNumError = $('<span id="ccNumError">Input valid credit card information</span>');
-//$('#ccNum').after(ccNumError);
+const ccNumError = $('<span id="ccNumError">Enter valid credit card number</span>');
+$('#cc-Num').after(ccNumError);
 (ccNumError).hide();
 
-const zipError = $('<span id="zipError">Input valid zip code information</span>');
-$('#zip').after(zipError);
-(zipError).hide();
-
-const cvvError = $('<span id="cvvError">Input valid cvv code information</span>');
-$('#cvv').after(cvvError);
-(cvvError).hide();
-
-// const paymentError = $('<span id="paymentError">Input payment information</span>');
-// $('#payment').after(paymentError);
-// (paymentError).hide();
-
-/*Checks payment is selected and valid, checks the zipcode and cvv number are entered and valid */
- function validPayment() {
-     console.log('good code')
-    let ccNum = $('#ccNum').val();
-    let ccNumRegex = /^[0-9]{3,4}$/
-    let value = $('#payment').val();
-    let zip = $('#zip').val();
-    let zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
-    let cvv = $('#cvv').val;
-    let cvvRegex =  /^[0-9]{3,4}$/;
-if (value === "credit card")
+function validNumber (){
+      let ccNum = $('#cc-num').val();
+    let ccNumRegex = /^[0-9]{13,16}$/;
+   if (ccNumRegex.test($('#cc-num').val()) === false /*&& ccNum ==="" */) //&& zipRegex.test(zip) === false || zip ==="" && cvvRegex.test(cvv) === false || cvv === "")
 {
-  paymentError.show;
-  return false
-}
-//    else
-//      {
-//        return true
-//      }
- if (ccNumRegex.test(ccNum) === false || ccNum ==="")
-{
-    $('#ccNum').after(ccNumError);
-    $('#ccNum').css('border-color','red');
+    $('#cc-num').css('border-color','red'); 
   ccNumError.show();
   return false
 }
-// else
-//   {
-//     return true
-//   }
-    
-if (zipRegex.test(zip) === false|| zip ==="") {
-  zipError.show();
-  $('#zip').css('border-color','red');
+if (ccNum === "") 
+{
+  $('#cc-num').css('border','red'); 
+  ccNumError.show();
   return false
 }
-// else
-//   {
-//     return true
-//   }
-if (cvvRegex.test(cvv) === false || cvv ==="")
-  {
-    cvvError.show;
-    $('#cvv').after(cvvError);
-    $('#cvv').css('border-color','red');
-    return false
-  }
 else
   {
+    $('#cc-num').css('border','none');
+    ccNumError.hide();
     return true
-  }
+   }
 }
+
+$('form').prepend('<p id="error-message"></p>');
+$('#error-message').hide();
+$('form').submit(function (e){
+   validName();
+   validEmail();
+   validActivity();
+   validNumber ();
+   //validPayment();
+  if (!validName() || !validEmail() || !validActivity() || !validNumber ()) //!validPayment()){
+  {
+  e.preventDefault();
+//alert('Form not complete')
+  }
+  else
+    {
+      alert('Form complete')
+    }
+});
+
+//  if (ccNumRegex.test(ccNum) === false || ccNum ==="" ) //&& zipRegex.test(zip) === false || zip ==="" && cvvRegex.test(cvv) === false || cvv === "")
+// {
+//     $('#cc-num').css('border-color','red'); 
+//   ccNumError.show();
+   
+  
+//   return false
+// }
+// else
+// //   {
+// //     //return true
+// //     $('#ccNum').removeClass(ccNumError)
+// //   }
+
+/*Added payment error messages in span tags*/
+// const paymentError = $('<span id="paymentError">Input valid email</span>');
+// $('#payment').after(paymentError);
+// paymentError.hide();
+
+
+
+// const zipError = $('<span id="zipError">Input valid zip code information</span>');
+// $('#zip').after(zipError);
+// (zipError).hide();
+
+// const cvvError = $('<span id="cvvError">Input valid cvv code information</span>');
+// $('#cvv').after(cvvError);
+// (cvvError).hide();
+
+/*Checks payment is selected and valid, checks the zipcode and cvv number are entered and valid */
+//  function validPayment() {
+//      //console.log(value.toLowerCase === "credit card")
+
+//     let value = $('#payment').val();
+//     let zip = $('#zip').val();
+//     let zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
+//     let cvv = $('#cvv').val();
+//     let cvvRegex =  /^[0-9]{3}$/;
+// if (value.toLowerCase === "credit card")
+// //console.log('yay')
+// {
+//   paymentError.show();
+//   return false
+// }
+// //    else
+// //      {
+// //        return true
+// //      }
+//  if (ccNumRegex.test(ccNum) === false || ccNum ==="" ) //&& zipRegex.test(zip) === false || zip ==="" && cvvRegex.test(cvv) === false || cvv === "")
+// {
+//     $('#cc-num').css('border-color','red'); 
+//   ccNumError.show();
+   
+  
+//   return false
+// }
+// else
+// //   {
+// //     //return true
+// //     $('#ccNum').removeClass(ccNumError)
+// //   }
+    
+// if (zipRegex.test(zip) === false && zip ==="") {
+//   zipError.show();
+//   $('#zip').css('border-color','red');
+//   return false
+// }
+// // else
+// //   {
+// //     return true
+// //   }
+// if (cvvRegex.test(cvv) === false && cvv === "")
+//   {
+//     cvvError.show();
+//     //$('#cvv').after(cvvError);
+//     $('#cvv').css('border-color','red');
+//     return false
+//   }
+// else
+//   {
+//     (ccNumError).hide();
+//     (cvvError).hide();
+//     (zipError).hide();
+//     $('#cc-num').css('border','none');
+//     $('#cvv').css('border','none');
+//     $('#zip').css('border','none');
+//     return true
+//   }
+// }
