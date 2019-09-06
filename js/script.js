@@ -10,8 +10,9 @@ const submitButton = $(':button')[0];
 
 //Makes the name field focus state
 $("#name").focus();
+
 //Set credit card as default payment method
-//$('#payment').val("credit card");
+
 $("#payment option:nth-child(2)").attr('selected','selected');
 
 /**
@@ -165,23 +166,68 @@ $("input[name='npm']").change(function () {
 
 
 //Initially hides paypal and bitcoin, shows clicked payment and hides other two options
-//$('#paypal, #bitcoin').hide();
-
+paypal, bitcoin.hide();
+ function validPayment(){
 $('#credit-card').next().hide().next().hide();
 $('#payment option[value="select_method"]').wrap('<span>').hide() // Hide the “Select Payment Method” `option`
 $('#payment').change(function (){
     $('#payment option:selected').each(function() {
+      console.log('good code')
         if($(this).text() === 'Credit Card') {
             $('#credit-card').fadeIn().next().hide().next().hide();
           } else if($(this).text() === 'PayPal'){
             $('#credit-card').hide().next().slideDown().next().hide();
-            $('#credit-card input').val(''); // Remove text from Credit Card fields
+            $('#credit-card input').val(""); // Remove text from Credit Card fields
+            ccNumError.hide();
+      $('#cc-num').css('border-color','none');
+      zipError.hide();
+      $('#zip').css('border-color','none');
+      cvvError.hide();
+    $('#cvv').css('border-color','none');
         } else if($(this).text() === 'Bitcoin'){
             $('#credit-card').hide().next().hide().next().slideDown();
-            $('#credit-card input').val(''); // Remove text from Credit Card fields
+            $('#credit-card input').val(""); // Remove text from Credit Card fields
+            ccNumError.hide();
+      $('#cc-num').css('border-color','none');
+      zipError.hide();
+      $('#zip').css('border-color','none');
+      cvvError.hide();
+    $('#cvv').css('border-color','none');
         }
     });
 });
+}
+// function validPayment(){
+//   console.log('good code')
+// $(document).ready(function(){
+//   $(".payment").change(function(){
+//     if ($('#payment option:selected').val() === "paypal") {
+//       console.log('good code')
+//       $('#credit-card, #bitcoin').hide();
+//       $('#paypal').show();
+//       ccNumError.hide();
+//       $('#cc-num').css('border-color','none');
+//       zipError.hide();
+//       $('#zip').css('border-color','none');
+//       cvvError.hide();
+//     $('#cvv').css('border-color','none');
+//   } else if ($('#payment option:selected').val() === "bitcoin") {
+//       $('#credit-card, #paypal').hide();
+//       ccNumError.hide();
+//       $('#cc-num').css('border-color','none');
+//       zipError.hide();
+//       $('#zip').css('border-color','none');
+//       cvvError.hide();
+//     $('#cvv').css('border-color','none');
+//       $('#bitcoin').show();
+//   } else {
+//       $('#credit-card').show();
+//       $('#paypal, #bitcoin').hide();
+//   }
+//   });
+// });
+// }
+
 
 
 ////////////////////////////////////////////Validation////////////////////////////////////////////////////////////////////////
@@ -190,64 +236,64 @@ $('#payment').change(function (){
 
 
 /*Added the error message in a span tag, checks for name validation, scrolls to top if error message is present*/
-// const nameError = $('<span id="nameError">Input name</span>');
-// $('#name').after(nameError);
-// nameError.hide();
+const nameError = $('<span id="nameError">Input name</span>');
+$('#name').after(nameError);
+nameError.hide();
 
-// function validName() {
-//   if ($('#name').val() === "" ) {
-//   //console.log("Error!");
-// $("html, body").animate({scrollTop: 0}, "slow");
-//     nameError.show();
-//   $('#name').css('border-color','red');
-//   return false
-// }
-// else 
-//   {
-//     $('#name').css('border','none');
-//     nameError.hide();
-//   return true
-// }
-// }
+function validName() {
+  if ($('#name').val() === "" ) {
+  //console.log("Error!");
+$("html, body").animate({scrollTop: 0}, "slow");
+    nameError.show();
+  $('#name').css('border-color','red');
+  return false
+}
+else 
+  {
+    $('#name').css('border','none');
+    nameError.hide();
+  return true
+}
+}
 
 // /*Added the error message in a span tag, checks for email validation, scrolls to top if error message is present*/
-// const mailError = $('<span id="mailError">Input valid email</span>');
-// $('#mail').after(mailError);
-// mailError.hide();
-// function validEmail() {
-//   let mailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(\.[a-zA-Z]+)+$/;
-//   let mail = $('#mail').val();
-//  // console.log('code good')
-//   if (mailRegex.test(mail) === false)
-//   {
-//     $("html, body").animate({scrollTop: 0}, "slow");
-// mailError.show();
-// $('#mail').css('border-color','red');
-//     return false
-//   }
-//     else 
-//     {
-//       $('#mail').css('border','none')
-//       mailError.hide();
-//     return true
-// }
-// }
+const mailError = $('<span id="mailError">Input valid email</span>');
+$('#mail').after(mailError);
+mailError.hide();
+function validEmail() {
+  let mailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(\.[a-zA-Z]+)+$/;
+  let mail = $('#mail').val();
+ // console.log('code good')
+  if (mailRegex.test(mail) === false)
+  {
+    $("html, body").animate({scrollTop: 0}, "slow");
+mailError.show();
+$('#mail').css('border-color','red');
+    return false
+  }
+    else 
+    {
+      $('#mail').css('border','none')
+      mailError.hide();
+    return true
+}
+}
 
 // /* Checks that 1 activity is checked, scrolls to top if 1 activity is not checked */
-// function validActivity(){
-//   //console.log('good code')
-//   if ($('.activities input[type=checkbox]:checked').length === 0)  {
-//    $('#total').html("Must choose 1 activity");
-//  $('.activities').addClass('error');
-// $("html, body").animate({scrollMiddle: 0}, "slow");
-// $('.activities').focus
-// }
-// else
-// {
-// $('.activities').removeClass('error');
-// return true
-// }
-// }
+ function validActivity(){
+  //console.log('good code')
+  if ($('.activities input[type=checkbox]:checked').length === 0)  {
+   $('#total').html("Must choose 1 activity");
+ $('.activities').addClass('error');
+$("html, body").animate({scrollMiddle: 0}, "slow");
+$('.activities').focus
+}
+else
+{
+$('.activities').removeClass('error');
+return true
+}
+}
 
 /* Checks for a valid credit card number, shows error message if there is no input or number is invalid */
 const ccNumError = $('<span id="ccNumError">Enter valid credit card number</span>');
@@ -271,6 +317,7 @@ if (ccNum === "")
   ccNumError.show();
   return false
 }
+
 else
   {
     $('#cc-num').css('border','none');
@@ -310,7 +357,7 @@ $('#cvv').after(cvvError);
 (cvvError).hide();
 
 function validCvv(){
-  console.log('good code')
+  // console.log('good code')
   let cvv = $('#cvv').val();
      let cvvRegex =  /^[0-9]{3}$/;
   if (cvvRegex.test($('#cvv').val()) === false )
@@ -339,14 +386,15 @@ Prevents the form from submitting if information is missing*/
 $('form').prepend('<p id="error-message"></p>');
 $('#error-message').hide();
 $('form').submit(function (e){
-  //  validName();
-  //  validEmail();
-  //  validActivity();
+   validName();
+   validEmail();
+   validActivity();
+  validPayment ();
    validNumber ();
    validZip ();
    validCvv ();
-   //validPayment();
-  if (/*!validName() || !validEmail() || !validActivity() || */!validNumber () || !validZip () || !validCvv ()) //!validPayment()){
+   validPayment();
+  if (!validName() || !validEmail() || !validActivity() || !validNumber () || !validZip () || !validCvv ()) //!validPayment()){
   {
   e.preventDefault();
 //alert('Form not complete')
