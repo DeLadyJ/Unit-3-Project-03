@@ -3,6 +3,7 @@
  * Jane Lewis
  */
 
+ /*Constants declared */
 const paragraphs = $("p");
 const paypal = $(paragraphs[0]);
 const bitcoin = $(paragraphs[1]);
@@ -24,9 +25,9 @@ $("#payment option:nth-child(2)").attr('selected','selected');
   });
 /**
  * In design menu -
- * hide option select theme
- * update color field to read "Please select a T-shirt theme"
- * hide color selection in drop down menu untile design theme is selected in
+ * hides option select theme
+ * updates color field to read "Please select a T-shirt theme"
+ * hides color selection in drop down menu untile design theme is selected 
  *
  */
 let chooseYourTheme = $("#color").append(new Option("Please select a t-shirt theme", "select"));  // create a new menu option and set the value equal to the string "select"
@@ -55,7 +56,7 @@ $('#design').change(function(){
 $('#color').find('option').hide();
 /*
 Activity Info
-Prevents same day and time
+Prevents activity with same day and time from being selected at the same time
 Adds activity cost
 */
 var jsFrameworks = $("input[name='js-frameworks'");
@@ -78,7 +79,7 @@ $("input[name='all']").change(function () {
 jsFrameworks.change(function () {
     if ($(this).prop("checked")) {
         express.prop("disabled", true);
-        express.parent().addClass("disabled");
+        express.parent().addClass("disabled"); //makes activity unavaliable if jsFrameworks is selected
         express.parent().append('<span class="unavailable">&nbsp;&nbsp;&nbsp;&nbsp;Unavailable</span>');
         updateCost(100);
     } else {
@@ -91,7 +92,7 @@ jsFrameworks.change(function () {
 jsLibraries.change(function () {
     if ($(this).prop("checked")) {
         nodeJS.prop("disabled", true);
-        nodeJS.parent().addClass("disabled");
+        nodeJS.parent().addClass("disabled"); //makes activity unavaliable if jsLibraries is selected
         nodeJS.parent().append('<span class="unavailable">&nbsp;&nbsp;&nbsp;&nbsp;Unavailable</span>');
         updateCost(100);
     } else {
@@ -104,7 +105,7 @@ jsLibraries.change(function () {
 express.change(function () {
     if ($(this).prop("checked")) {
         jsFrameworks.prop("disabled", true);
-        jsFrameworks.parent().addClass("disabled");
+        jsFrameworks.parent().addClass("disabled"); //makes activity unavaliable if express is selected
         jsFrameworks.parent().append('<span class="unavailable">&nbsp;&nbsp;&nbsp;&nbsp;Unavailable</span>');
         updateCost(100);
     } else {
@@ -117,7 +118,7 @@ express.change(function () {
 nodeJS.change(function () {
     if ($(this).prop("checked")) {
         jsLibraries.prop("disabled", true);
-        jsLibraries.parent().addClass("disabled");
+        jsLibraries.parent().addClass("disabled"); //makes activity unavaliable if nodeJS is selected
         jsLibraries.parent().append('<span class="unavailable">&nbsp;&nbsp;&nbsp;&nbsp;Unavailable</span>');
         updateCost(100);
     } else {
@@ -141,6 +142,8 @@ $("input[name='npm']").change(function () {
         updateCost(-100);
     }
 });
+
+/*Initially hides paypal and bitcoin, paypal / bitcoin paragraphs, focus is on credit card selection with number, zip and cvv visible*/
 $('#paypal').hide();
 $('#bitcoin').hide();
 function showCreditPayments(input) {
@@ -163,68 +166,9 @@ $('#payment').change(function() {
   showCreditPayments(selectedPayment)
   console.log(selectedPayment)
 });
-//  function validPayment(){
-//
-// $('#payment option[value="select_method"]').wrap('<span>').hide() // Hide the "Select Payment Method" `option`
-// $('#payment').change(function (){
-//     $('#payment option:selected').each(function() {
-//       console.log('good code')
-//         if($(this).text() === 'Credit Card') {
-//             $('#credit-card').fadeIn().next().hide().next().hide();
-//           } else if($(this).text() === 'PayPal'){
-//             $('#credit-card').hide().next().slideDown().next().hide();
-//             $('#credit-card input').val(""); // Remove text from Credit Card fields
-//             ccNumError.hide();
-//       $('#cc-num').css('border-color','none');
-//       zipError.hide();
-//       $('#zip').css('border-color','none');
-//       cvvError.hide();
-//     $('#cvv').css('border-color','none');
-//         } else if($(this).text() === 'Bitcoin'){
-//             $('#credit-card').hide().next().hide().next().slideDown();
-//             $('#credit-card input').val(""); // Remove text from Credit Card fields
-//             ccNumError.hide();
-//       $('#cc-num').css('border-color','none');
-//       zipError.hide();
-//       $('#zip').css('border-color','none');
-//       cvvError.hide();
-//     $('#cvv').css('border-color','none');
-//         }
-//     });
-// });
-// }
-// function validPayment(){
-//   console.log('good code')
-// $(document).ready(function(){
-//   $(".payment").change(function(){
-//     if ($('#payment option:selected').val() === "paypal") {
-//       console.log('good code')
-//       $('#credit-card, #bitcoin').hide();
-//       $('#paypal').show();
-//       ccNumError.hide();
-//       $('#cc-num').css('border-color','none');
-//       zipError.hide();
-//       $('#zip').css('border-color','none');
-//       cvvError.hide();
-//     $('#cvv').css('border-color','none');
-//   } else if ($('#payment option:selected').val() === "bitcoin") {
-//       $('#credit-card, #paypal').hide();
-//       ccNumError.hide();
-//       $('#cc-num').css('border-color','none');
-//       zipError.hide();
-//       $('#zip').css('border-color','none');
-//       cvvError.hide();
-//     $('#cvv').css('border-color','none');
-//       $('#bitcoin').show();
-//   } else {
-//       $('#credit-card').show();
-//       $('#paypal, #bitcoin').hide();
-//   }
-//   });
-// });
-// }
+
 ////////////////////////////////////////////Validation////////////////////////////////////////////////////////////////////////
-/*Added the error message in a span tag, checks for name validation, scrolls to top if error message is present*/
+/*Added the error message in a span tag, checks if name information is entered, shows error message if name input is incorrect*/
 const nameError = $('<span id="nameError">Input name</span>');
 $('#name').after(nameError);
 nameError.hide();
@@ -244,7 +188,7 @@ else
   return true
 }
 }
-// /*Added the error message in a span tag, checks for email validation, scrolls to top if error message is present*/
+// /*Added the error message in a span tag, checks if email information is entered, shows error message if email is incorrect*/
 const mailError = $('<span id="mailError">Input valid email</span>');
 $('#mail').after(mailError);
 mailError.hide();
